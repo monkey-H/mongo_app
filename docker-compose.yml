@@ -1,21 +1,21 @@
 MongoSh1Rs1:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"'
 MongoSh1Rs2:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"'
 MongoSh1Rs3:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs1  --dbpath /mmm --storageEngine wiredTiger"'
 MongoSh2Rs1:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"'
 MongoSh2Rs2:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"'
 MongoSh2Rs3:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"
+  command: '/bin/bash -c "mkdir -p /mmm && mongod --replSet rs2  --dbpath /mmm --storageEngine wiredTiger"'
 MongoConfigsvr1:
   image: docker.iwanna.xyz:5000/mongo
   command: '/bin/bash -c "mkdir -p /mmm/configdb && mongod --configsvr --dbpath /mmm --replSet configReplSet --port 27019 --storageEngine wiredTiger"'
@@ -27,7 +27,7 @@ MongoConfigsvr3:
   command: '/bin/bash -c "mkdir -p /mmm/configdb && mongod --configsvr  --dbpath /mmm --replSet configReplSet --port 27019 --storageEngine wiredTiger"'
 MongoRouter:
   image: docker.iwanna.xyz:5000/mongo
-  command: "mongos  --dbpath /mmm --configdb configReplSet/{{MongoConfigsvr1}}:27019,{{MongoConfigsvr2}}:27019,{{MongoConfigsvr3}}:27019"
+  command: "mongos --configdb configReplSet/{{MongoConfigsvr1}}:27019,{{MongoConfigsvr2}}:27019,{{MongoConfigsvr3}}:27019"
   links:
     - MongoConfigsvr3
     - MongoConfigsvr2
